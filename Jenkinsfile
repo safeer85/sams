@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Pull code from your repository
-                git branch: 'master', url: 'https://github.com/your-repo/project.git'
+                git branch: 'master', url: 'https://github.com/safeer85/sams.git'
             }
         }
         stage('Install Frontend Dependencies') {
@@ -45,12 +45,12 @@ pipeline {
         }
         stage('Build Docker Containers') {
             steps {
-                sh 'docker-compose build'
+                sh 'compose build'
             }
         }
         stage('Deploy Containers') {
             steps {
-                sh 'docker-compose up -d'
+                sh 'compose up -d'
             }
         }
     }
