@@ -2,12 +2,12 @@ pipeline {
     agent {
         docker {
             image 'node:20' // Use Node.js version 20 Docker image
-           
+            args '-v /c/ProgramData/Jenkins/.jenkins/workspace/sams:/workspace' // Map Windows directory to Docker
         }
     }
     environment {
-        FRONTEND_DIR = './client'
-        BACKEND_DIR = './server'
+        FRONTEND_DIR = '/workspace/client' // Use Unix-style paths for Docker
+        BACKEND_DIR = '/workspace/server' // Use Unix-style paths for Docker
     }
     stages {
         stage('Checkout Code') {
@@ -46,12 +46,18 @@ pipeline {
         }
         stage('Build Docker Containers') {
             steps {
-                sh 'docker-compose build' // Use docker-compose build
+                sh '''
+                    cd /workspace
+                    docker-compose build
+                ''' // Use docker-compose build
             }
         }
         stage('Deploy Containers') {
             steps {
-                sh 'docker-compose up -d' // Use docker-compose up -d
+                sh '''
+                    cd /workspace
+                    docker-compose up -d
+                ''' // Use docker-compose up -d
             }
         }
     }
