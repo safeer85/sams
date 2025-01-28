@@ -2,12 +2,12 @@ pipeline {
     agent {
         docker {
             image 'node:20' // Use Node.js version 20 Docker image
-            args '-v /c/ProgramData/Jenkins/.jenkins/workspace/sams:/workspace' // Map Windows directory to Docker
+             // Map Windows directory to Docker
         }
     }
     environment {
-        FRONTEND_DIR = '/workspace/client' // Use Unix-style paths for Docker
-        BACKEND_DIR = '/workspace/server' // Use Unix-style paths for Docker
+        FRONTEND_DIR = '/client' // Use Unix-style paths for Docker
+        BACKEND_DIR = '/server' // Use Unix-style paths for Docker
     }
     stages {
         stage('Checkout Code') {
