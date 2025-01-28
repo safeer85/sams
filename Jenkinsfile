@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:20' // Use Node.js version 20 Docker image
-           args '-v\C:\ProgramData\Jenkins\.jenkins\workspace\sams'
+           
         }
     }
     environment {
